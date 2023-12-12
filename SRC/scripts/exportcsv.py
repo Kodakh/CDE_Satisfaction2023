@@ -73,3 +73,5 @@ def resultats(url_categories):
     df_final = df_links_resultats_cat_sub_cat_number_of_sub_cat.sort_values(by=['Result'], ascending=False)
     
     return df_final.to_csv('new_file', index = False)
+
+#test
