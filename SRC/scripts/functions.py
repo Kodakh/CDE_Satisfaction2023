@@ -66,7 +66,7 @@ def resultats(url_categories):
     df_links_resultats_cat_sub_cat_number_of_sub_cat = pd.merge(df_categories_resultats_links, df_categories_sub_categories_number_sub_categories, on = ['cat'], how = 'inner' )
     df_links_resultats_cat_sub_cat_number_of_sub_cat['Result']= df_links_resultats_cat_sub_cat_number_of_sub_cat['Result'].astype(float)
     df_final = df_links_resultats_cat_sub_cat_number_of_sub_cat.sort_values(by=['Result'], ascending=False)
-    return df_final.to_csv('Nombre_entreprises_categorie_121223.csv', index = False)
+    return df_final.to_csv('../../SRC/data/raw/Nombre_entreprises_categorie_121223.csv', index = False)
 
 ######################################################################
 ######################################################################
