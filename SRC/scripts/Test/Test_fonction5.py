@@ -84,41 +84,30 @@ def scrap_reviews(url):
 
     return df
 
-##### Défilement page TEMPORAIRE !!!!!!!!!!!!!!!!! MODIFIER PAR SCRIPT MONTASSAR
-base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
-
-# pages to scrape
-num_pages = 500
-
-
-
 
 df_all_pages = pd.DataFrame()
 
 
+##### Défilement page
 
+base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
+username = getpass.getuser()
+csv_file_path = fr'C:\Users\{username}\Desktop\ProjetDS\CDE_Satisfaction2023\data\raw\cdiscount_reviews_000-200.csv'
 
-# Loop starting from the specified page
+# pages to scrape
+num_pages = 200
 start_page = 1
 
-for page_num in range(start_page, num_pages + 1):
+# Loop
+
+for page_num in range(start_page, start_page + num_pages):
     page_url = f'{base_url}?page={page_num}'
-    df_page = scrap_reviews(page_url)
-    df_all_pages = pd.concat([df_all_pages, df_page], ignore_index=True)
-
-    username = getpass.getuser()
-    csv_file_path = fr'C:\Users\{username}\Desktop\ProjetDS\CDE_Satisfaction2023\data\raw\cdiscount_reviews_080124.csv'
-
-
-
-    # Pause 
-    if page_num % 3 == 0 or page_num == num_pages:
-        if page_num < num_pages:
-            print(f"Sleeping after scraping page {page_num}")
-            time.sleep(5)  # Pause 
-        else:
-            print("Scraping complete.")
-
-
+    
+    try:
+        df_page = scrap_reviews(page_url)
+        df_all_pages = pd.concat([df_all_pages, df_page], ignore_index=True)
+    except Exception as e:
+        print(f"Error scraping page {page_num}: {e}")
+    
 
 df_all_pages.to_csv(csv_file_path, index=False)
