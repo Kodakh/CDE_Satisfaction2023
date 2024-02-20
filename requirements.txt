@@ -7,3 +7,4 @@ pip install spacy
 python -m spacy download fr_core_news_sm
 pip install sentencepiece
 python -m pip install setfit
+pip install tqdm
