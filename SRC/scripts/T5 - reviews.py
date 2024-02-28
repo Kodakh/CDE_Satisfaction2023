@@ -80,6 +80,16 @@ def separate_punctuation(text):
     return re.sub(r"(\w)([.,;!?])", r"\1 \2 ", text)
 
 big_df['review'] = big_df['review'].apply(separate_punctuation)
+
+
+
+# Interval [-1;1] pour les notes 
+def transformer(note):
+    return -1 + ((note - 1) * (1 - (-1)) / (5 - 1))
+big_df['note'] = big_df['note'].apply(transformer)
+
+
+# Aperçu
 print(big_df['review'].head())
 
 
