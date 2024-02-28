@@ -3,10 +3,10 @@ from textblob import TextBlob
 from textblob_fr import PatternTagger, PatternAnalyzer
 from tqdm import tqdm, tqdm_pandas
 
-# Read the CSV file
+
 df = pd.read_csv('CDE_Satisfaction2023/data/processed/L5_processed.csv')
 
-# Define the sentiment analysis function
+# sentiment analysis function
 def analyse_sentiment(texte):
     try:
         blob = TextBlob(texte, pos_tagger=PatternTagger(), analyzer=PatternAnalyzer())
@@ -17,11 +17,10 @@ def analyse_sentiment(texte):
 
 tqdm_pandas(tqdm())
 
-# Apply the sentiment analysis
+# Apply
 df['polarite'], df['subjectivite'] = zip(*df['review'].progress_apply(analyse_sentiment))
 
-# Ensure that 'note' is a numerical column (if it's not already)
+# type note
 df['note'] = pd.to_numeric(df['note'], errors='coerce')
 
-# Save the DataFrame to a new CSV file
 df.to_csv("CDE_Satisfaction2023/data/processed/L6_processed.csv", index=False)
