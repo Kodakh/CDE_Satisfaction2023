@@ -10,9 +10,5 @@ import re
 import ast
 import csv
 import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
-import spacy
-from spacy.training import Example
-from spacy.util import minibatch
 import random
