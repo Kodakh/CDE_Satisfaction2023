@@ -17,6 +17,7 @@ I. Clonage et installation des packages externes
 
 
 II. Architecture du projet 
+```bash
 ├── data
 │   ├── processed
 │   │   ├── L4_processed.csv
@@ -93,3 +94,5 @@ II. Architecture du projet
             └── T7.py
 
 13 directories, 61 files
+
+```
