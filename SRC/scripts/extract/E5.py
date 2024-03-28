@@ -117,7 +117,7 @@ if not os.path.exists(output_directory):
     print(f"Created directory: {output_directory}")  # Log message
 
 # pages to scrape
-num_pages = 20
+num_pages = 5
 start_page = 1
 
 # Loop (à coupler avec cronjob)

@@ -59,6 +59,9 @@ big_df = big_df.dropna(subset=['review'])
 def clean_text(text):
     # Remplace "é", "è", "ê" par "e"
     text = re.sub(r"[éèê]", "e", text)
+    # Remplace "ç" par "c"
+    text = re.sub(r"ç", "c", text)
+    return text
     # Ensuite, supprime tous les caractères non-ASCII
     text = re.sub(r"[^\x00-\x7F]+", " ", text)
     return text
@@ -71,6 +74,7 @@ def separate_punctuation(text):
 
 tqdm.pandas(desc="Separating punctuation")
 big_df['review'] = big_df['review'].progress_apply(separate_punctuation)
+
 
 # Définir le répertoire de sortie
 output_directory = '/home/jben/Documents/CDE_Satisfaction2023/data/processed'

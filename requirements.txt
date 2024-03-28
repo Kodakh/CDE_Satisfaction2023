@@ -3,6 +3,8 @@ beautifulsoup4==4.10.0  # Pour l'analyse HTML et le scraping web
 requests==2.26.0  # Pour effectuer des requêtes HTTP
 tqdm==4.66.2  # Pour l'affichage de la barre de progression
 textblob==0.15.3 # Temporaire /!\ # Pour le scoring "reviews"
+vaderSentiment-fr
+levenshtein
 
 #import csv
 #import pandas as pd 

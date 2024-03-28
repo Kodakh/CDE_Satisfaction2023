@@ -1,29 +1,29 @@
 import pandas as pd
-from textblob import TextBlob
-from textblob_fr import PatternTagger, PatternAnalyzer
-from tqdm import tqdm, tqdm_pandas
+from vaderSentiment_fr.vaderSentiment import SentimentIntensityAnalyzer
+from tqdm import tqdm
+from multiprocessing import Pool
+import numpy as np
 
+SIA = SentimentIntensityAnalyzer()
 
-# Que fait le script ? - scoring
+# Charger le fichier CSV
+df = pd.read_csv('data/processed/L5_processed.csv')
 
+# Diviser les données en chunks pour le traitement parallèle
+num_chunks = 8  # Nombre de chunks (peut être ajusté selon le nombre de cœurs de processeur)
+chunks = np.array_split(df, num_chunks)
 
-df = pd.read_csv('/home/jben/Documents/CDE_Satisfaction2023/data/processed/L5_processed.csv')
+# Fonction pour l'analyse de sentiment sur un chunk de données
+def process_chunk(chunk):
+    chunk['scores'] = chunk['review'].apply(lambda x: SIA.polarity_scores(x))
+    return chunk
 
-# sentiment analysis function
-def analyse_sentiment(texte):
-    try:
-        blob = TextBlob(texte, pos_tagger=PatternTagger(), analyzer=PatternAnalyzer())
-        return blob.sentiment[0], blob.sentiment[1]  #  polarity & subjectivity
-    except Exception as e:
-        print(f"Error processing text: {texte}, Error: {e}")
-        return None, None
+# Effectuer l'analyse de sentiment en parallèle
+with Pool(num_chunks) as pool:
+    chunks = list(tqdm(pool.imap(process_chunk, chunks), total=num_chunks))
 
-tqdm_pandas(tqdm())
+# Concaténer les résultats des chunks en un seul DataFrame
+df = pd.concat(chunks)
 
-# Apply
-df['polarite'], df['subjectivite'] = zip(*df['review'].progress_apply(analyse_sentiment))
-
-# type note
-df['note'] = pd.to_numeric(df['note'], errors='coerce')
-
-df.to_csv("/home/jben/Documents/CDE_Satisfaction2023/data/processed/L6_processed.csv", index=False)
+# Enregistrer le DataFrame modifié dans un nouveau fichier CSV
+df.to_csv('data/processed/L6_processed.csv', index=False)
