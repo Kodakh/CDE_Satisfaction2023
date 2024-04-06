@@ -1,5 +1,6 @@
 import csv
 from elasticsearch import Elasticsearch
+from elasticsearch.helpers import bulk
 
 es = Elasticsearch(
     ['http://localhost:9200'],
@@ -9,6 +10,10 @@ es = Elasticsearch(
 
 ### Intégration des données non relationnelles (commentaires)
 index_name = 'test_norelationnel'
+
+# Vérifier si l'index existe déjà et le supprimer s'il existe
+if es.indices.exists(index=index_name):
+    es.indices.delete(index=index_name)
 
 # Définition du mapping
 mapping = {
@@ -72,23 +77,31 @@ mapping = {
 # Création de l'index avec le mapping
 es.indices.create(index=index_name, body=mapping)
 
-with open('CDE_Satisfaction2023/data/processed/L7_processed.csv', 'r', encoding='utf-8') as file:
-    reader = csv.DictReader(file)
-    for row in reader:
-        note = int(row['note'])
+csv_file_path = 'data/processed/L7_processed.csv'
 
-        entry = {
-            'author': row['author'],
-            'review': row['review'],
-            'date_review': row['date_review'],
-            'note': note,
-            'cdiscount_response': int(row['cdiscount_response']) if row['cdiscount_response'] else None,
-            'cdiscount_response_date': row['cdiscount_response_date'] if row['cdiscount_response_date'] else None,
-            'cdiscount_response_content': row['cdiscount_response_content'] if row['cdiscount_response_content'] else None,
-            'neg': float(row['neg']) if row['neg'] else None,
-            'neu': float(row['neu']) if row['neu'] else None,
-            'pos': float(row['pos']) if row['pos'] else None,
-            'compound': float(row['compound']) if row['compound'] else None
-        }
+def generate_actions():
+    with open(csv_file_path, 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            note = int(row['note'])
 
-        es.index(index=index_name, body=entry)
+            entry = {
+                'author': row['author'],
+                'review': row['review'],
+                'date_review': row['date_review'],
+                'note': note,
+                'cdiscount_response': int(row['cdiscount_response']) if row['cdiscount_response'] else None,
+                'cdiscount_response_date': row['cdiscount_response_date'] if row['cdiscount_response_date'] else None,
+                'cdiscount_response_content': row['cdiscount_response_content'] if row['cdiscount_response_content'] else None,
+                'neg': float(row['neg']) if row['neg'] else None,
+                'neu': float(row['neu']) if row['neu'] else None,
+                'pos': float(row['pos']) if row['pos'] else None,
+                'compound': float(row['compound']) if row['compound'] else None
+            }
+
+            yield {
+                "_index": index_name,
+                "_source": entry
+            }
+
+bulk(es, generate_actions())
