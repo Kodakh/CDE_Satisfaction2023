@@ -1,12 +1,12 @@
 import csv
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
+from tqdm import tqdm
 
 es = Elasticsearch(
     ['http://localhost:9200'],
     http_auth=('elastic', '4862')
 )
-
 
 ### Intégration des données non relationnelles (commentaires)
 index_name = 'test_norelationnel'
@@ -104,4 +104,20 @@ def generate_actions():
                 "_source": entry
             }
 
-bulk(es, generate_actions())
+# Obtenir le nombre total de lignes dans le fichier CSV
+with open(csv_file_path, 'r', encoding='utf-8') as file:
+    total_lines = sum(1 for _ in file) - 1  # Soustraire 1 pour exclure l'en-tête
+
+# Initialiser la barre de progression
+progress_bar = tqdm(total=total_lines, unit='lignes', desc='Ingestion des données')
+
+# Wrapper pour mettre à jour la barre de progression
+def progress_wrapper(actions):
+    for action in actions:
+        yield action
+        progress_bar.update(1)
+
+bulk(es, progress_wrapper(generate_actions()))
+
+# Fermer la barre de progression
+progress_bar.close()

@@ -1,29 +1,31 @@
 import pandas as pd
 from vaderSentiment_fr.vaderSentiment import SentimentIntensityAnalyzer
 from tqdm import tqdm
-from multiprocessing import Pool
-import numpy as np
 
 SIA = SentimentIntensityAnalyzer()
 
-# Charger le fichier CSV
+print("Chargement du fichier CSV...")
 df = pd.read_csv('data/processed/L5_processed.csv')
+print("Fichier CSV chargé avec succès.")
 
-# Diviser les données en chunks pour le traitement parallèle
-num_chunks = 8  # Nombre de chunks (peut être ajusté selon le nombre de cœurs de processeur)
-chunks = np.array_split(df, num_chunks)
+# Initialize the 'scores' column with empty values
+df['scores'] = ''
 
-# Fonction pour l'analyse de sentiment sur un chunk de données
-def process_chunk(chunk):
-    chunk['scores'] = chunk['review'].apply(lambda x: SIA.polarity_scores(x))
-    return chunk
+# Initialiser la barre de progression
+progress_bar = tqdm(total=len(df), desc="Analyse de sentiment")
 
-# Effectuer l'analyse de sentiment en parallèle
-with Pool(num_chunks) as pool:
-    chunks = list(tqdm(pool.imap(process_chunk, chunks), total=num_chunks))
+# Effectuer l'analyse de sentiment pour chaque ligne du DataFrame
+for index, row in df.iterrows():
+    df.at[index, 'scores'] = SIA.polarity_scores(row['review'])
+    
+    # Mettre à jour la barre de progression après chaque itération
+    progress_bar.update(1)
 
-# Concaténer les résultats des chunks en un seul DataFrame
-df = pd.concat(chunks)
+# Fermer la barre de progression
+progress_bar.close()
 
-# Enregistrer le DataFrame modifié dans un nouveau fichier CSV
+print("Analyse de sentiment terminée.")
+
+print("Enregistrement du DataFrame dans un fichier CSV...")
 df.to_csv('data/processed/L6_processed.csv', index=False)
+print("Enregistrement terminé.")

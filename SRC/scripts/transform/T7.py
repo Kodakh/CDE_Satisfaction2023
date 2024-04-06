@@ -21,7 +21,7 @@ with open(fichier_destination, 'w', newline='') as csv_file:
     writer.writeheader()
 
     # Parcourir les lignes du CSV source avec tqdm
-    for row in tqdm(data, desc="Traitement des lignes"):
+    for row in tqdm(data, desc="Rajout des indices 'neg', 'neu' et 'pos'"):
         scores = json.loads(row['scores'].replace("'", "\""))
         row.update(scores)
         del row['scores']

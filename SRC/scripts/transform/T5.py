@@ -91,4 +91,4 @@ output_csv_path = os.path.join(output_directory, 'L5_processed.csv')
 big_df.to_csv(output_csv_path, index=False)
 
 # Afficher un message indiquant que les données ont été sauvegardées
-print(f"Data has been saved to {output_csv_path}")
+print(f"Saving OK {output_csv_path}")

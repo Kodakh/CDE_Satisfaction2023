@@ -5,16 +5,11 @@ import getpass
 import time
 import os
 
-# Function to extract comments from a Trustpilot page
-# Que fait le script ?  Extraction reviews
-
-
+# Fonction pour extraire les commentaires d'une page Trustpilot FR
 def scrap_reviews(url):
-
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Listes
     authors = []
     contents = []
     dates = []
@@ -22,10 +17,6 @@ def scrap_reviews(url):
     response_titles = []
     response_dates = []
     response_contents = []
-
-
-    # Debug
-    print(f"Scrapping page: {url}")
 
     reviews = soup.find_all('div', class_='styles_reviewCardInner__EwDq2')
 
@@ -50,10 +41,9 @@ def scrap_reviews(url):
             note = int(note_element['alt'].split()[1])
         else:
             note = int(review.find('div', {'data-service-review-rating': True})['data-service-review-rating'])
-
         notes.append(note)
 
-        # Cdiscount
+        # Réponse de Cdiscount
         response_tag = review.find('div', class_='styles_replyInfo__FYSje')
         if response_tag:
             response_title = response_tag.find('p', class_='styles_replyCompany__ro_yX')
@@ -76,7 +66,7 @@ def scrap_reviews(url):
             response_dates.append(None)
             response_contents.append(None)
 
-    # df
+    # Créer un DataFrame avec les données extraites
     df = pd.DataFrame({
         'Author': authors,
         'Content': contents,
@@ -90,10 +80,7 @@ def scrap_reviews(url):
     return df
 
 
-df_all_pages = pd.DataFrame()
-
-
-
+# Fonction pour compiler les .csv (4000 commentaires/csv) en 1 seul fichier .csv
 def update_csv_with_new_data(new_data, csv_file_path):
     if os.path.exists(csv_file_path):
         existing_data = pd.read_csv(csv_file_path)
@@ -102,37 +89,36 @@ def update_csv_with_new_data(new_data, csv_file_path):
         consolidated_data = new_data
 
     consolidated_data.to_csv(csv_file_path, index=False)
-    print(f"Data has been saved to {csv_file_path}")  # Log message
+    print(f"Data has been saved")  # Log message
 
 
-##### Défilement page
 
+# Paramètres de scraping
 base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
 username = getpass.getuser()
 output_directory = 'data/raw/nosql'
-
 
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
     print(f"Created directory: {output_directory}")  # Log message
 
-# pages to scrape
-num_pages = 5
-start_page = 1
-
-# Loop (à coupler avec cronjob)
+num_pages = 5  # Nombre de pages à scraper
+start_page = 1  # Page de départ
 
 csv_file_path = os.path.join(output_directory, 'cdiscount_reviews_last.csv')
 
 df_all_pages = pd.DataFrame()
 
+# Boucle de scraping
 for page_num in range(start_page, start_page + num_pages):
-        page_url = f'{base_url}?page={page_num}'
-        
-        try:
-            df_page = scrap_reviews(page_url)
-            df_all_pages = pd.concat([df_all_pages, df_page], ignore_index=True)
-        except Exception as e:
-            print(f"Error scraping page {page_num}: {e}")
+    page_url = f'{base_url}?page={page_num}'
 
+    try:
+        df_page = scrap_reviews(page_url)
+        df_all_pages = pd.concat([df_all_pages, df_page], ignore_index=True)
+        print(f"Scraped page {page_num} OK")  # Log message
+    except Exception as e:
+        print(f"Error scraping page {page_num}: {e}")
+
+# Mise à jour du fichier CSV avec les nouvelles données
 update_csv_with_new_data(df_all_pages, csv_file_path)
