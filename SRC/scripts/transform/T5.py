@@ -3,7 +3,7 @@ import pandas as pd
 import re
 from tqdm import tqdm
 
-folder_path = "/home/jben/Documents/CDE_Satisfaction2023/data/raw/nosql"
+folder_path = 'data/raw/nosql'
 all_files = os.listdir(folder_path)
 
 # Filter out non-CSV files
@@ -77,7 +77,8 @@ big_df['review'] = big_df['review'].progress_apply(separate_punctuation)
 
 
 # Définir le répertoire de sortie
-output_directory = '/home/jben/Documents/CDE_Satisfaction2023/data/processed'
+output_directory = 'data/processed'
+
 
 # Vérifier si le répertoire de destination existe, sinon le créer
 if not os.path.exists(output_directory):

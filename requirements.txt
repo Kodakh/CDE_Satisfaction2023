@@ -5,6 +5,7 @@ tqdm==4.66.2  # Pour l'affichage de la barre de progression
 textblob==0.15.3 # Temporaire /!\ # Pour le scoring "reviews"
 vaderSentiment-fr
 levenshtein
+docker==24.0.5
 
 #import csv
 #import pandas as pd 

@@ -109,7 +109,7 @@ def update_csv_with_new_data(new_data, csv_file_path):
 
 base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
 username = getpass.getuser()
-output_directory = '/home/jben/Documents/CDE_Satisfaction2023/data/raw/nosql'
+output_directory = 'data/raw/nosql'
 
 
 if not os.path.exists(output_directory):
