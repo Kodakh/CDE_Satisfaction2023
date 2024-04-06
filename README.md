@@ -10,7 +10,8 @@ Membre : Joris BENOIT
 I. Clonage et installation des packages externes 
 
 1. git clone https://github.com/Kodakh/CDE_Satisfaction2023
-2. pip install -r requirements.txt
+2. sudo apt install python3-pip
+3. pip install -r requirements.txt
 
 
 
