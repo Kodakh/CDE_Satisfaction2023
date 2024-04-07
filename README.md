@@ -13,7 +13,7 @@ I. Clonage et installation des packages externes
 2. sudo apt install python3-pip
 3. cd CDE_Satisfaction2023
 4. pip install -r requirements.txt
-5. python3 main.py
+5. python3 SRC/main.py
 
 
 
