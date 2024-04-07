@@ -13,4 +13,4 @@ def main():
     T7.main()
     L7.main()
     
-    print("Processus ETL terminé avec succès !")
+    print("ETL terminé avec succès !")

@@ -28,7 +28,7 @@
 # a éxecuter toutes les 24h (reviews cdiscount)
 
 
-# Relationnel
+# Relationnel (TODO)
 # 1 fois par semaine
 # 0 0 * * 1 /home/jben/Desktop/ProjetDS/CDE_Satisfaction2023/SRC/scripts/E1 - extraction resultats.py
 # 0 0 * * 1 /home/jben/Desktop/ProjetDS/CDE_Satisfaction2023/SRC/scripts/E2 - extraction urls.py
@@ -40,7 +40,11 @@
 
 
 # Non relationnel
-# 1 fois par jour
-* * * * * /home/jben/Desktop/ProjetDS/CDE_Satisfaction2023/SRC/scripts/E5 - extraction reviews.py
-* * * * * /home/jben/Desktop/ProjetDS/CDE_Satisfaction2023/SRC/scripts/T5 - reviews.py
-* * * * * /home/jben/Desktop/ProjetDS/CDE_Satisfaction2023/SRC/scripts/T6 - scoring.py
+# Toutes les 6 heures
+
+# Debugging (éxecution toutes les 5mins)
+#*/5 * * * *  cd /home/jben/CDE_Satisfaction2023 && /usr/bin/python3 /home/jben/CDE_Satisfaction2023/SRC/main.py >> /home/jben/CDE_Satisfaction2023/logs/cron.log 2>&1
+
+
+# Stable
+0 */6 * * * cd /home/jben/CDE_Satisfaction2023 && /usr/bin/python3 /home/jben/CDE_Satisfaction2023/SRC/main.py >> /home/jben/CDE_Satisfaction2023/logs/cron.log 2>&1
