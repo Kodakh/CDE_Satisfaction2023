@@ -1,9 +1,16 @@
 ### Intégration des données  relationnelles (mapping site trustpilot)
-        
-from elasticsearch import Elasticsearch
 import csv
+from elasticsearch import Elasticsearch
+from elasticsearch.helpers import bulk
+from tqdm import tqdm
 
-index_name = "test_relationnel"
+
+es = Elasticsearch(
+    ['http://localhost:9200'],
+    http_auth=('elastic', '4862')
+)
+
+index_name = "relationnel"
 
 mapping = {
     "settings": {
@@ -28,7 +35,7 @@ es.indices.delete(index=index_name, ignore=[400, 404])
 es.indices.create(index=index_name, body=mapping)
 
 # Réindexer les données à partir du fichier CSV
-with open('/home/jben/Documents/CDE_Satisfaction2023/data/processed/L4_processed.csv', 'r') as file:
+with open('data/processed/L4_processed.csv', 'r') as file:
     csv_reader = csv.DictReader(file)
     next(csv_reader)  # Skip the header row
     
