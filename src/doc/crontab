@@ -43,7 +43,7 @@
 # Toutes les 6 heures
 
 # Debugging (éxecution toutes les 5mins)
-#*/5 * * * *  cd /home/jben/CDE_Satisfaction2023 && /usr/bin/python3 /home/jben/CDE_Satisfaction2023/SRC/main.py >> /home/jben/CDE_Satisfaction2023/logs/cron.log 2>&1
+# */5 * * * *  cd /home/jben/CDE_Satisfaction2023 && /usr/bin/python3 /home/jben/CDE_Satisfaction2023/SRC/main.py >> /home/jben/CDE_Satisfaction2023/logs/cron.log 2>&1
 
 
 # Stable
