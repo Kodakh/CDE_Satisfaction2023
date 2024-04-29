@@ -11,6 +11,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie du script d'extraction
 COPY src/scripts/extract/E5.py src/scripts/extract/
+COPY src/scripts/extract/main.py src/scripts/extract/
+
+# Health Check
+HEALTHCHECK --interval=5s --timeout=3s \
+CMD curl -f http://localhost:9999/health || exit 1
 
 # Exécution du script
 CMD ["python", "src/scripts/extract/E5.py"]

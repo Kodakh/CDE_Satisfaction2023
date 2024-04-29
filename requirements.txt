@@ -4,6 +4,8 @@ requests==2.26.0  # Pour effectuer des requêtes HTTP
 tqdm==4.66.2  # Pour l'affichage de la barre de progression
 vaderSentiment-fr
 levenshtein
+uvicorn==0.15.0
+fastapi==0.68.1
 
 #import csv
 #import pandas as pd 

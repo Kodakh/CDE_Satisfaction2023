@@ -1,16 +1,16 @@
 FROM python:3.9
 
-# répertoire de travail dans le conteneur
+
 WORKDIR /app
 
-# Copie du fichier de dépendances
 COPY requirements.txt .
 
-# Installation des dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copie des scripts de transformation
-COPY src/scripts/transform/T5.py src/scripts/transform/T6.py src/scripts/transform/T7.py ./src/scripts/transform/
+COPY src/scripts/transform/T5.py src/scripts/transform/T6.py src/scripts/transform/T7.py src/scripts/transform/main.py ./src/scripts/transform/ 
 
-# Exécution des scripts
-CMD python src/scripts/transform/T5.py && python src/scripts/transform/T6.py && python src/scripts/transform/T7.py
+# Health Check
+HEALTHCHECK --interval=5s --timeout=3s \
+  CMD curl -f http://localhost:8888/health || exit 1
+
+CMD python src/scripts/transform/T5.py && python src/scripts/transform/T6.py && python src/scripts/transform/T7.py && python src/scripts/transform/main.py
