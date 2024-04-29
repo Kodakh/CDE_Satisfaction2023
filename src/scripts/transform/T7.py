@@ -3,10 +3,10 @@ import json
 from tqdm import tqdm
 
 # Nom du fichier CSV source
-fichier_source = 'data/processed/L6_processed.csv'
+fichier_source = '/data/reviews_processed_6.csv'
 
 # Nom du fichier CSV de destination
-fichier_destination = 'data/processed/L7_processed.csv'
+fichier_destination = '/data/reviews_processed_7.csv'
 
 # Lire le fichier CSV source
 with open(fichier_source, 'r') as csv_file:

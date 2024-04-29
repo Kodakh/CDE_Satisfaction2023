@@ -95,17 +95,17 @@ def update_csv_with_new_data(new_data, csv_file_path):
 
 # Paramètres de scraping
 base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
-username = getpass.getuser()
-output_directory = 'data/raw/nosql'
+
+output_directory = '/data'  # Utilisation du chemin du volume Docker
 
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
-    print(f"Created directory: {output_directory}")  # Log message
+    print(f"Created directory: {output_directory}")  # Message de journalisation
 
 num_pages = 5  # Nombre de pages à scraper
 start_page = 1  # Page de départ
 
-csv_file_path = os.path.join(output_directory, 'cdiscount_reviews_last.csv')
+csv_file_path = os.path.join(output_directory, 'reviewslast100.csv')
 
 df_all_pages = pd.DataFrame()
 

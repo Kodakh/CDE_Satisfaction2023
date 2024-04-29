@@ -5,7 +5,7 @@ from tqdm import tqdm
 SIA = SentimentIntensityAnalyzer()
 
 print("Chargement du fichier CSV...")
-df = pd.read_csv('data/processed/L5_processed.csv')
+df = pd.read_csv('/data/reviews_processed_5.csv')
 print("Fichier CSV chargé avec succès.")
 
 # Initialize the 'scores' column with empty values
@@ -27,5 +27,5 @@ progress_bar.close()
 print("Analyse de sentiment terminée.")
 
 print("Enregistrement du DataFrame dans un fichier CSV...")
-df.to_csv('data/processed/L6_processed.csv', index=False)
+df.to_csv('/data/reviews_processed_6.csv', index=False)
 print("Enregistrement terminé.")

@@ -2,11 +2,8 @@ pandas==1.3.3  # Pour la manipulation et l'analyse des données
 beautifulsoup4==4.10.0  # Pour l'analyse HTML et le scraping web
 requests==2.26.0  # Pour effectuer des requêtes HTTP
 tqdm==4.66.2  # Pour l'affichage de la barre de progression
-textblob==0.15.3 # Temporaire /!\ # Pour le scoring "reviews"
 vaderSentiment-fr
 levenshtein
-elasticsearch==8.13.0
-docker==24.0.5
 
 #import csv
 #import pandas as pd 

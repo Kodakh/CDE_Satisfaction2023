@@ -1,0 +1,16 @@
+FROM python:3.9
+
+# répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copie du fichier de dépendances
+COPY requirements.txt .
+
+# Installation des dépendances
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copie du script d'extraction
+COPY src/scripts/extract/E5.py src/scripts/extract/
+
+# Exécution du script
+CMD ["python", "src/scripts/extract/E5.py"]
