@@ -6,6 +6,7 @@ vaderSentiment-fr
 levenshtein
 uvicorn==0.15.0
 fastapi==0.68.1
+docker
 
 #import csv
 #import pandas as pd 
