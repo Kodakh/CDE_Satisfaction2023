@@ -3,13 +3,10 @@ from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from tqdm import tqdm
 
-es = Elasticsearch(
-    ['http://localhost:9200'],
-    http_auth=('elastic', '4862')
-)
+es = Elasticsearch(["http://elasticsearch:9200"])
 
 ### Intégration des données non relationnelles (commentaires)
-index_name = 'test_norelationnel'
+index_name = 'reviews'
 
 # Vérifier si l'index existe déjà et le supprimer s'il existe
 if es.indices.exists(index=index_name):
@@ -77,7 +74,7 @@ mapping = {
 # Création de l'index avec le mapping
 es.indices.create(index=index_name, body=mapping)
 
-csv_file_path = 'data/processed/L7_processed.csv'
+csv_file_path = '/data/reviews_processed_7.csv'
 
 def generate_actions():
     with open(csv_file_path, 'r', encoding='utf-8') as file:

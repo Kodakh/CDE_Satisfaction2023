@@ -3,7 +3,7 @@ version: '3'
 services:
   extraction:
     image: image-extraction
-    container_name: extraction_container
+    container_name: extraction
     volumes:
       - ./app/data:/data
     ports:
@@ -13,7 +13,7 @@ services:
 
   transformation:
     image: image-transformation
-    container_name: transformation_container
+    container_name: transformation
     volumes:
       - ./app/data:/data
     ports:
@@ -22,6 +22,7 @@ services:
       - app_network
     depends_on:
       - extraction
+
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.1
@@ -40,20 +41,44 @@ services:
       - 9200:9200
     networks:
       - app_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=60s"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+      
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.13.1
     container_name: kibana
     ports:
       - 5601:5601
+    networks:
+      - app_network
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
       - ELASTICSEARCH_USERNAME=jben
       - ELASTICSEARCH_PASSWORD=4862
     depends_on:
       - elasticsearch
+
+
+
+  loading:
+    image: image-loading
+    container_name: loading
+    volumes:
+      - ./app/data:/data
+    ports:
+      - 7777:7777
     networks:
       - app_network
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+
 
 volumes:
   data:
