@@ -1,4 +1,4 @@
-sudo chown -R jben:jben app
+sudo chown -R freebox:freebox app
 
 docker build -f src/containers/Dockerfile.extraction -t image-extraction .
 docker build -f src/containers/Dockerfile.transformation -t image-transformation .

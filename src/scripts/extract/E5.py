@@ -68,13 +68,13 @@ def scrap_reviews(url):
 
     # Créer un DataFrame avec les données extraites
     df = pd.DataFrame({
-        'Author': authors,
-        'Content': contents,
-        'Date': dates,
-        'Note': notes,
-        'Réponse': response_titles,
-        'Date Réponse': response_dates,
-        'Contenu de la réponse': response_contents,
+        'author': authors,
+        'review': contents,
+        'date': dates,
+        'note': notes,
+        'response': response_titles,
+        'response_date': response_dates,
+        'response_content': response_contents,
     })
 
     return df
