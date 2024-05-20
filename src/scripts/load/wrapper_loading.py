@@ -2,7 +2,7 @@ import time
 import subprocess
 
 def run_script():
-    subprocess.run(["python", "src/scripts/extract/E0.py"])
+    subprocess.run(["python", "src/scripts/load/L0.py"])
 
 if __name__ == "__main__":
     while True:

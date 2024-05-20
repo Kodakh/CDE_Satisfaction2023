@@ -2,7 +2,7 @@ import time
 import subprocess
 
 def run_script():
-    subprocess.run(["python", "src/scripts/extract/T0.py"])
+    subprocess.run(["python", "src/scripts/transform/T0.py"])
 
 if __name__ == "__main__":
     while True:
