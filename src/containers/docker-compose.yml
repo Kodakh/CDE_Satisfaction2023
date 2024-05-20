@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   extraction:
@@ -7,9 +7,14 @@ services:
     volumes:
       - ./app/data:/data
     ports:
-      - 9999:9999
+      - 8000:8000
     networks:
       - app_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   transformation:
     image: image-transformation
@@ -21,8 +26,8 @@ services:
     networks:
       - app_network
     depends_on:
-      - extraction
-
+      extraction:
+        condition: service_healthy
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.1
@@ -47,8 +52,6 @@ services:
       timeout: 5s
       retries: 5
 
-      
-
   kibana:
     image: docker.elastic.co/kibana/kibana:8.13.1
     container_name: kibana
@@ -61,9 +64,13 @@ services:
       - ELASTICSEARCH_USERNAME=jben
       - ELASTICSEARCH_PASSWORD=4862
     depends_on:
-      - elasticsearch
-
-
+      elasticsearch:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:5601/api/status || exit 1"]
+      interval: 1m
+      timeout: 20s
+      retries: 10
 
   loading:
     image: image-loading
@@ -75,10 +82,8 @@ services:
     networks:
       - app_network
     depends_on:
-      elasticsearch:
+      kibana:
         condition: service_healthy
-
-
 
 volumes:
   data:
