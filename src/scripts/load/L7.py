@@ -25,10 +25,10 @@ mapping = {
                     }
                 }
             },
-            "cdiscount_response": {
+            "response_yesno": {
                 "type": "long"
             },
-            "cdiscount_response_content": {
+            "response": {
                 "type": "text",
                 "fields": {
                     "keyword": {
@@ -36,14 +36,14 @@ mapping = {
                     }
                 }
             },
-            "cdiscount_response_date": {
+            "response_date": {
                 "type": "date",
                 "format": "dd/MM/yyyy"
             },
             "compound": {
                 "type": "float"
             },
-            "date_review": {
+            "review_date": {
                 "type": "date",
                 "format": "dd/MM/yyyy"
             },
@@ -85,11 +85,11 @@ def generate_actions():
             entry = {
                 'author': row['author'],
                 'review': row['review'],
-                'date_review': row['date_review'],
+                'review_date': row['review_date'],
                 'note': note,
-                'cdiscount_response': int(row['cdiscount_response']) if row['cdiscount_response'] else None,
-                'cdiscount_response_date': row['cdiscount_response_date'] if row['cdiscount_response_date'] else None,
-                'cdiscount_response_content': row['cdiscount_response_content'] if row['cdiscount_response_content'] else None,
+                'response_yesno': int(row['response_yesno']) if row['response_yesno'] else None,
+                'response_date': row['response_date'] if row['response_date'] else None,
+                'response': row['response'] if row['response'] else None,
                 'neg': float(row['neg']) if row['neg'] else None,
                 'neu': float(row['neu']) if row['neu'] else None,
                 'pos': float(row['pos']) if row['pos'] else None,

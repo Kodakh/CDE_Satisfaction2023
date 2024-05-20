@@ -70,11 +70,11 @@ def scrap_reviews(url):
     df = pd.DataFrame({
         'author': authors,
         'review': contents,
-        'date': dates,
+        'review_date': dates,
         'note': notes,
-        'response': response_titles,
+        'response_yesno': response_titles,
         'response_date': response_dates,
-        'response_content': response_contents,
+        'response': response_contents,
     })
 
     return df
@@ -84,7 +84,7 @@ def scrap_reviews(url):
 def update_csv_with_new_data(new_data, csv_file_path):
     if os.path.exists(csv_file_path):
         existing_data = pd.read_csv(csv_file_path)
-        consolidated_data = pd.concat([existing_data, new_data]).drop_duplicates(subset=['Author', 'Date', 'Content'], keep='last')
+        consolidated_data = pd.concat([existing_data, new_data]).drop_duplicates(subset=['author', 'review_date', 'review'], keep='last')
     else:
         consolidated_data = new_data
 

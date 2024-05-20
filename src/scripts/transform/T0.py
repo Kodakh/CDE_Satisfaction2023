@@ -13,10 +13,15 @@ print("Chargement du fichier CSV...")
 df = pd.read_csv(os.path.join(base_path, 'reviewslast100.csv'))
 print("Fichier CSV chargé avec succès.")
 
+# Ensure all reviews are strings
+df['review'] = df['review'].astype(str)
+df['response_yesno'] = df['response_yesno'].fillna(0).map(lambda x: 1 if x else 0)
+
 # Analyse de sentiment
 print("Début de l'analyse de sentiment...")
 SIA = SentimentIntensityAnalyzer()
 df['scores'] = [SIA.polarity_scores(review) for review in tqdm(df['review'], desc="Analyse de sentiment")]
+
 
 # Enregistrement des résultats intermédiaires
 intermediate_csv_path = os.path.join(base_path, 'reviews_processed_6.csv')
@@ -31,8 +36,8 @@ with open(intermediate_csv_path, 'r') as csv_file:
 
 output_csv_path = os.path.join(base_path, 'reviews_processed_7.csv')
 with open(output_csv_path, 'w', newline='') as csv_file:
-    fieldnames = ['author', 'review', 'date_review', 'note', 'cdiscount_response', 'cdiscount_response_date',
-                  'cdiscount_response_content', 'neg', 'neu', 'pos', 'compound']
+    fieldnames = ['author', 'review', 'review_date', 'note', 'response_yesno', 'response_date',
+                  'response', 'neg', 'neu', 'pos', 'compound']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
 
