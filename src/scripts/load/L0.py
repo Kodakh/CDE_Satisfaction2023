@@ -1,14 +1,12 @@
 import csv
 from elasticsearch import Elasticsearch
+from elasticsearch.helpers import bulk, BulkIndexError
 from elasticsearch.helpers import bulk
 from tqdm import tqdm
 
 es = Elasticsearch(["http://elasticsearch:9200"])
-
-### Intégration des données non relationnelles (commentaires)
 index_name = 'reviews'
 
-# Vérifier si l'index existe déjà et le supprimer s'il existe
 if es.indices.exists(index=index_name):
     es.indices.delete(index=index_name)
 
@@ -71,9 +69,7 @@ mapping = {
     }
 }
 
-# Création de l'index avec le mapping
 es.indices.create(index=index_name, body=mapping)
-
 csv_file_path = '/data/reviews_processed_7.csv'
 
 def generate_actions():
@@ -81,7 +77,7 @@ def generate_actions():
         reader = csv.DictReader(file)
         for row in reader:
             note = int(row['note'])
-
+            
             entry = {
                 'author': row['author'],
                 'review': row['review'],
@@ -94,6 +90,7 @@ def generate_actions():
                 'neu': float(row['neu']) if row['neu'] else None,
                 'pos': float(row['pos']) if row['pos'] else None,
                 'compound': float(row['compound']) if row['compound'] else None
+
             }
 
             yield {
@@ -101,20 +98,20 @@ def generate_actions():
                 "_source": entry
             }
 
-# Obtenir le nombre total de lignes dans le fichier CSV
-with open(csv_file_path, 'r', encoding='utf-8') as file:
-    total_lines = sum(1 for _ in file) - 1  # Soustraire 1 pour exclure l'en-tête
 
-# Initialiser la barre de progression
+with open(csv_file_path, 'r', encoding='utf-8') as file:
+    total_lines = sum(1 for _ in file) - 1
+
 progress_bar = tqdm(total=total_lines, unit='lignes', desc='Ingestion des données')
 
-# Wrapper pour mettre à jour la barre de progression
 def progress_wrapper(actions):
     for action in actions:
         yield action
         progress_bar.update(1)
 
-bulk(es, progress_wrapper(generate_actions()))
+try:
+    bulk(es, progress_wrapper(generate_actions()))
+except BulkIndexError as e:
+    print("Errors occurred:", e.errors)
 
-# Fermer la barre de progression
 progress_bar.close()

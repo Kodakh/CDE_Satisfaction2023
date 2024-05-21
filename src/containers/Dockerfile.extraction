@@ -15,7 +15,7 @@ RUN pip install fastapi uvicorn
 # Copie des scripts nécessaires dans le conteneur
 COPY src/scripts/extract/E0.py src/scripts/extract/
 COPY src/scripts/extract/wrapper_extraction.py src/scripts/extract/
-COPY src/scripts/extract/healthcheck.py src/scripts/extract/
+COPY src/scripts/extract/healthcheck_extract.py src/scripts/extract/
 
 # Rendre le script wrapper exécutable
 RUN chmod +x src/scripts/extract/wrapper_extraction.py
@@ -24,4 +24,4 @@ RUN chmod +x src/scripts/extract/wrapper_extraction.py
 EXPOSE 8000
 
 # Définition de la commande pour exécuter le script wrapper et le serveur FastAPI
-CMD ["sh", "-c", "uvicorn src.scripts.extract.healthcheck:app --host 0.0.0.0 --port 8000 & python src/scripts/extract/wrapper_extraction.py"]
+CMD ["sh", "-c", "uvicorn src.scripts.extract.healthcheck_extract:app --host 0.0.0.0 --port 8000 & python src/scripts/extract/wrapper_extraction.py"]

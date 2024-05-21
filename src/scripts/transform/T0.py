@@ -4,18 +4,32 @@ from vaderSentiment_fr.vaderSentiment import SentimentIntensityAnalyzer
 from tqdm import tqdm
 import csv
 import json
+from healthcheck_transform import transformation_complete
 
 # Chemin de base pour les données
-base_path = '/data'
+base_path1 = '/data/ext'
 
-# Chargement et préparation du fichier CSV initial
-print("Chargement du fichier CSV...")
-df = pd.read_csv(os.path.join(base_path, 'reviewslast100.csv'))
-print("Fichier CSV chargé avec succès.")
+global df_raw_reviews
+df = None
 
-# Ensure all reviews are strings
+def load_raw_reviews():
+    global df
+    if df is None:
+        print("Chargement du fichier raw_reviews.csv...")
+        df = pd.read_csv(os.path.join(base_path1, 'raw_reviews.csv'))
+        print("Fichier raw_reviews.csv chargé avec succès.")
+    else:
+        print("Fichier raw_reviews.csv déjà chargé.")
+    return df
+
+# Utilisation de la fonction pour charger les données
+df = load_raw_reviews()
+
+# Cleaning
 df['review'] = df['review'].astype(str)
 df['response_yesno'] = df['response_yesno'].fillna(0).map(lambda x: 1 if x else 0)
+df['review'].replace('nan', pd.NA, inplace=True)
+df.dropna(subset=['review'], inplace=True)
 
 # Analyse de sentiment
 print("Début de l'analyse de sentiment...")
@@ -24,7 +38,9 @@ df['scores'] = [SIA.polarity_scores(review) for review in tqdm(df['review'], des
 
 
 # Enregistrement des résultats intermédiaires
-intermediate_csv_path = os.path.join(base_path, 'reviews_processed_6.csv')
+
+base_path2 = '/data'
+intermediate_csv_path = os.path.join(base_path2, 'reviews_processed_6.csv')
 df.to_csv(intermediate_csv_path, index=False)
 print("Enregistrement intermédiaire terminé.")
 
@@ -34,7 +50,7 @@ with open(intermediate_csv_path, 'r') as csv_file:
     reader = csv.DictReader(csv_file)
     data = list(reader)
 
-output_csv_path = os.path.join(base_path, 'reviews_processed_7.csv')
+output_csv_path = os.path.join(base_path2, 'reviews_processed_7.csv')
 with open(output_csv_path, 'w', newline='') as csv_file:
     fieldnames = ['author', 'review', 'review_date', 'note', 'response_yesno', 'response_date',
                   'response', 'neg', 'neu', 'pos', 'compound']
@@ -48,3 +64,6 @@ with open(output_csv_path, 'w', newline='') as csv_file:
         writer.writerow(row)
 
 print("Traitement terminé. Le fichier final a été créé.")
+
+# Indiquer que la transformation est terminée
+transformation_complete = True

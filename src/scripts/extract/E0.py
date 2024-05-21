@@ -96,7 +96,7 @@ def update_csv_with_new_data(new_data, csv_file_path):
 # Paramètres de scraping
 base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
 
-output_directory = '/data'  # Utilisation du chemin du volume Docker
+output_directory = '/data/ext'  # Utilisation du chemin du volume Docker
 
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
