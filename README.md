@@ -1,19 +1,25 @@
 # CDE_Satisfaction2023
 Projet Satisfaction Client - CDE 2023
 
-Il s'agit du repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest de la promotion Data Engineer de Juillet 2023
+Repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest pour la promotion Data Engineer de Juillet 2023 Continue
 
 Chef de projet : Sebastien SIME - DataScientest
-
 Membre : Joris BENOIT
 
-I. Clonage et installation des packages externes 
+I. Installation du projet - Testé sur Ubuntu Jammy 22.04.4 LTS
 
-1. git clone https://github.com/Kodakh/CDE_Satisfaction2023
-2. sudo apt install python3-pip
-3. cd CDE_Satisfaction2023
-4. pip install -r requirements.txt
-5. python3 SRC/main.py
+sudo apt update
+sudo apt install python3-pip
+git clone https://github.com/Kodakh/CDE_Satisfaction2023
+pip install -r requirements.txt
+sudo groupadd docker
+sudo usermod -aG docker $USER
+nano ~/.bashrc
+export PATH="/home/freebox/.local/bin:$PATH"
+source ~/.bashrc
+
+cd CDE_Satisfaction2023
+run.sh
 
 
 
@@ -24,48 +30,36 @@ II. Architecture du projet "CDE_Satisfaction2023"
 .
 ├── README.md
 ├── Report
-│   └── Rendu Rapport Etape 1 - SC DIACOH - BELKHIR - BENOIT.rtf
-├── SRC
-│   ├── containers
-│   │   └── docker-compose.yml
-│   ├── doc
-│   │   └── crontab
-│   ├── main.py
-│   └── scripts
-│       ├── extract
-│       │   ├── E1.py
-│       │   ├── E2.py
-│       │   ├── E3.py
-│       │   ├── E4.py
-│       │   ├── E5.py
-│       │   └── __init__.py
-│       │
-│       ├── load
-│       │   ├── L1.py
-│       │   ├── L7.py
-│       │   └── __init__.py   
-│       │
-│       └── transform
-│           ├── T1.py
-│           ├── T2.py
-│           ├── T5.py
-│           ├── T6.py
-│           ├── T7.py
-│           └── __init__.py
-│ 
-├── data
-│   ├── processed
-│   │   ├── L5_processed.csv
-│   │   ├── L6_processed.csv
-│   │   └── L7_processed.csv
-│   └── raw
-│       └── nosql
-│           ├── cdiscount_reviews_1_X.csv
-│           └── cdiscount_reviews_last.csv
-├── logs
-│   └── cron.log
-├── notebook
-└── requirements.txt
+│   └── Rendu Rapport Etape 1.rtf
+├── requirements.txt
+├── run.sh
+└── src
+    ├── containers
+    │   ├── Dockerfile.extraction
+    │   ├── Dockerfile.loading
+    │   ├── Dockerfile.transformation
+    │   ├── app
+    │   │   └── data
+    │   │       └── ext
+    │   │           └── raw_reviews.csv
+    │   ├── docker-compose.yml
+    │   └── setup.sh
+    ├── doc
+    │   └── crontab
+    └── scripts
+        ├── extract
+        │   ├── E0.py
+        │   ├── healthcheck_extract.py
+        │   └── wrapper_extraction.py
+        ├── load
+        │   ├── L0.py
+        │   └── wrapper_loading.py
+        └── transform
+            ├── T0.py
+            ├── healthcheck_transform.py
+            └── wrapper_transformation.py
+
+11 directories, 19 files
 
 
 ```
