@@ -8,18 +8,11 @@ Membre : Joris BENOIT
 
 I. Installation du projet - Testé sur Ubuntu Jammy 22.04.4 LTS
 
-sudo apt update
-sudo apt install python3-pip
-git clone https://github.com/Kodakh/CDE_Satisfaction2023
-pip install -r requirements.txt
-sudo groupadd docker
-sudo usermod -aG docker $USER
-nano ~/.bashrc
-export PATH="/home/freebox/.local/bin:$PATH"
-source ~/.bashrc
-
 cd CDE_Satisfaction2023
 run.sh
+cd src
+cd containers
+setup.sh
 
 
 
