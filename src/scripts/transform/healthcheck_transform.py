@@ -4,7 +4,7 @@ transformation_complete = False
 
 app = FastAPI()
 
-@app.get('/healthcheck')
+@app.get('/health')
 def healthcheck():
     if transformation_complete:
         return {'status': 'ok'}

@@ -28,8 +28,8 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8888/health"]
       interval: 30s
-      timeout: 10s
-      retries: 3
+      timeout: 20s
+      retries: 10
     depends_on:
       extraction:
         condition: service_healthy
