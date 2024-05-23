@@ -71,7 +71,7 @@ from elasticsearch.helpers import bulk
 from tqdm import tqdm
 
 es = Elasticsearch(["http://elasticsearch:9200"])
-index_name = 'archive_reviews'
+index_name = 'reviews_archive'
 
 if es.indices.exists(index=index_name):
     es.indices.delete(index=index_name)
