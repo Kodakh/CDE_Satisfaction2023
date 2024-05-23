@@ -3,7 +3,9 @@ import requests
 import pandas as pd
 import getpass
 import time
+import datetime
 import os
+
 
 # Fonction pour extraire les commentaires d'une page Trustpilot FR
 def scrap_reviews(url):
@@ -78,18 +80,6 @@ def scrap_reviews(url):
 
     return df
 
-def update_csv_with_new_data(new_data, csv_file_path):
-    if os.path.exists(csv_file_path):
-        existing_data = pd.read_csv(csv_file_path)
-        consolidated_data = pd.concat([existing_data, new_data]).drop_duplicates(subset=['author', 'review_date', 'review'], keep='last')
-    else:
-        consolidated_data = new_data
-
-    consolidated_data.to_csv(csv_file_path, index=False)
-    print(f"Extraction OK")  # Log message
-
-
-
 # Paramètres de scraping
 base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
 
@@ -102,20 +92,21 @@ if not os.path.exists(output_directory):
 num_pages = 5  # Nombre de pages à scraper
 start_page = 1  # Page de départ
 
-csv_file_path = os.path.join(output_directory, 'last_reviews.csv')
-
 df_all_pages = pd.DataFrame()
 
-# Boucle de scraping
 for page_num in range(start_page, start_page + num_pages):
     page_url = f'{base_url}?page={page_num}'
 
     try:
         df_page = scrap_reviews(page_url)
         df_all_pages = pd.concat([df_all_pages, df_page], ignore_index=True)
-        print(f"Scraping page {page_num} OK")  # Log message
+        print(f"Scraping page {page_num} OK")
     except Exception as e:
         print(f"Error scraping page {page_num}: {e}")
 
-# Mise à jour du fichier CSV avec les nouvelles données
-update_csv_with_new_data(df_all_pages, csv_file_path)
+today = datetime.datetime.now()
+date_string = today.strftime("%Y-%m-%d")
+csv_file_name = f'reviews_{date_string}_raw.csv'
+csv_file_path = os.path.join(output_directory, csv_file_name)
+df_all_pages.to_csv(csv_file_path, index=False)
+print(f"Fichier CSV créé : {csv_file_path}")

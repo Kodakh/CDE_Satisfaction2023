@@ -1,16 +1,23 @@
 import csv
+import glob
+import os
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk, BulkIndexError
 from elasticsearch.helpers import bulk
 from tqdm import tqdm
+from datetime import datetime
 
 es = Elasticsearch(["http://elasticsearch:9200"])
-index_name = 'reviews'
+
+
+print("Traitement des scores de sentiment...")
+today = datetime.now().strftime('%Y-%m-%d')
+
+index_name = f'reviews_{today}'
 
 if es.indices.exists(index=index_name):
     es.indices.delete(index=index_name)
 
-# Définition du mapping
 mapping = {
     "mappings": {
         "properties": {
@@ -70,7 +77,11 @@ mapping = {
 }
 
 es.indices.create(index=index_name, body=mapping)
-csv_file_path = '/data/reviews_processed.csv'
+
+basepath2 = '/data'
+csv_file_path0 = glob.glob(os.path.join(basepath2, 'reviews_*_processed.csv'))
+csv_file_path = max(csv_file_path0, key=os.path.getctime)
+
 
 def generate_actions():
     with open(csv_file_path, 'r', encoding='utf-8') as file:

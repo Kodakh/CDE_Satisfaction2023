@@ -13,7 +13,7 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 
 # Copie des scripts nécessaires dans le conteneur
 COPY src/scripts/archive/A0.py src/scripts/archive/
-
+COPY src/scripts/archive/data/archive_raw.csv /arch/
 
 
 # Définition de la commande pour exécuter le script wrapper et le serveur FastAPI

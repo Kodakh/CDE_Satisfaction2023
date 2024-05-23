@@ -92,6 +92,18 @@ services:
       transformation:
         condition: service_healthy
 
+
+  archive:
+    image: image-archive
+    container_name: archive
+    volumes:
+      - ./app/data:/data
+    networks:
+      - app_network
+    depends_on:
+      kibana:
+        condition: service_healthy
+
 volumes:
   data:
   esdata:
