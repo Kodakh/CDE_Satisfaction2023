@@ -70,7 +70,7 @@ mapping = {
 }
 
 es.indices.create(index=index_name, body=mapping)
-csv_file_path = '/data/reviews_processed_7.csv'
+csv_file_path = '/data/reviews_processed.csv'
 
 def generate_actions():
     with open(csv_file_path, 'r', encoding='utf-8') as file:
@@ -102,7 +102,7 @@ def generate_actions():
 with open(csv_file_path, 'r', encoding='utf-8') as file:
     total_lines = sum(1 for _ in file) - 1
 
-progress_bar = tqdm(total=total_lines, unit='lignes', desc='Ingestion des données')
+progress_bar = tqdm(total=total_lines, unit='rows', desc='Loading data')
 
 def progress_wrapper(actions):
     for action in actions:

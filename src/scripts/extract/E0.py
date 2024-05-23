@@ -25,7 +25,7 @@ def scrap_reviews(url):
         author = review.find('span', class_='typography_heading-xxs__QKBS8').text.strip()
         authors.append(author)
 
-        # Contenu commentaire (avec NaN)
+        # Contenu commentaire
         content_element = review.find('p', class_='typography_body-l__KUYFJ')
         content = content_element.text.strip() if content_element else None
         contents.append(content)
@@ -35,7 +35,7 @@ def scrap_reviews(url):
         formatted_date = pd.to_datetime(date).strftime('%d/%m/%Y')
         dates.append(formatted_date)
 
-        # Note (avec NaN)
+        # Note
         note_element = review.find('img', class_='icon_icon__ECGRl')
         if note_element and 'alt' in note_element.attrs:
             note = int(note_element['alt'].split()[1])
@@ -66,7 +66,6 @@ def scrap_reviews(url):
             response_dates.append(None)
             response_contents.append(None)
 
-    # Créer un DataFrame avec les données extraites
     df = pd.DataFrame({
         'author': authors,
         'review': contents,
@@ -79,8 +78,6 @@ def scrap_reviews(url):
 
     return df
 
-
-# Fonction pour compiler les .csv (4000 commentaires/csv) en 1 seul fichier .csv
 def update_csv_with_new_data(new_data, csv_file_path):
     if os.path.exists(csv_file_path):
         existing_data = pd.read_csv(csv_file_path)
@@ -89,7 +86,7 @@ def update_csv_with_new_data(new_data, csv_file_path):
         consolidated_data = new_data
 
     consolidated_data.to_csv(csv_file_path, index=False)
-    print(f"Data has been saved")  # Log message
+    print(f"Extraction OK")  # Log message
 
 
 
@@ -100,12 +97,12 @@ output_directory = '/data/ext'  # Utilisation du chemin du volume Docker
 
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
-    print(f"Created directory: {output_directory}")  # Message de journalisation
+    print(f"Creation du repertoire: {output_directory}") 
 
 num_pages = 5  # Nombre de pages à scraper
 start_page = 1  # Page de départ
 
-csv_file_path = os.path.join(output_directory, 'reviewslast100.csv')
+csv_file_path = os.path.join(output_directory, 'last_reviews.csv')
 
 df_all_pages = pd.DataFrame()
 
@@ -116,7 +113,7 @@ for page_num in range(start_page, start_page + num_pages):
     try:
         df_page = scrap_reviews(page_url)
         df_all_pages = pd.concat([df_all_pages, df_page], ignore_index=True)
-        print(f"Scraped page {page_num} OK")  # Log message
+        print(f"Scraping page {page_num} OK")  # Log message
     except Exception as e:
         print(f"Error scraping page {page_num}: {e}")
 

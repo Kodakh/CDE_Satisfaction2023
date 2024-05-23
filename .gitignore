@@ -2,3 +2,6 @@
 .rtf*
 /data*
 /logs*
+src/containers/app/data/reviews_processed.csv
+src/containers/app/data/ext/last_reviews.csv
+src/scripts/archive/data/archive_processed.csv
