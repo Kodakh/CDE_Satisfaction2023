@@ -26,13 +26,8 @@ docker-compose up -d
 
 ```
 
-II. Vision finale du Dashboard :
 
-![Dashboard Kibana](src/doc/dashboard_view.png)
-
-
-
-III. Architecture du projet "CDE_Satisfaction2023"
+II. Architecture du projet "CDE_Satisfaction2023"
 
 ```bash
 .
@@ -70,3 +65,8 @@ III. Architecture du projet "CDE_Satisfaction2023"
 
 
 ```
+
+
+III. Vision finale du Dashboard :
+
+![Dashboard Kibana](src/doc/dashboard_view.png)
