@@ -28,7 +28,7 @@ docker-compose up
 
 II. Vision finale du Dashboard :
 
-![Dashboard Kibana](src/doc/dashboard_view.jpg)
+![Dashboard Kibana](src/doc/dashboard_view.png)
 
 
 
