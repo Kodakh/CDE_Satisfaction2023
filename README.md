@@ -1,7 +1,6 @@
 # 1. Présentation du projet
 
-# CDE_Satisfaction2023
-### Projet Satisfaction Client - Cdiscount/Trustpilot
+# Satisfaction Client - Cdiscount/Trustpilot
 
 Repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest pour la promotion Data Engineer de Juillet 2023 Continue
 
