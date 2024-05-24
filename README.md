@@ -16,7 +16,11 @@ Repository GitHub concernant le projet "Satisfaction Client" proposé par DataSc
 Ce projet développe et met en œuvre un pipeline ETL simple pour extraire, transformer et charger des données issues du site 'Trustpilot'. 
 Après le traitement des données, celles-ci sont indexées dans ElasticSearch puis exposées via Kibana, un outil de visualisation open source permettant une analyse et une visualisation intéractives.
 
-Le projet s'éxecute de facon quotidienne et de facon automatisée
+Le projet s'éxecute de facon quotidienne et de facon automatisée.
+Des logs sont disponibles pour s'assurer que les services fonctionnent correctement :
+
+![Logs du container 'Extraction'](src/doc/logs_extraction.png)
+![Logs du container 'Transformation'](src/doc/logs_transformation.png)
 
 
 1. **Installation du projet - Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS**
@@ -45,6 +49,9 @@ Le projet s'articule autour de 6 micro-services construit via des images Dockerf
 4. *Loading* => Chargement et indexation des données transformées dans le SGBD
 5. *ElasticSearch* => Moteur de recherche pour les données 
 6. *Kibana* => Visualisation et interprétation a l'aide d'un Dashboard
+7. *Network* => réseau partagé par l'ensemble des containers pour faire passerelle entre chaque service
+
+![Containers Dockers](src/doc/Docker.png)
 
 
 ```bash
