@@ -3,9 +3,13 @@ import pandas as pd
 from vaderSentiment_fr.vaderSentiment import SentimentIntensityAnalyzer
 from tqdm import tqdm
 import csv
+import unicodedata
+import re
 
 # Chemin de base pour les données
 base_path = '/arch'
+
+
 
 def load_archive_raw():
     print("Chargement du fichier archive_raw.csv...")
@@ -16,8 +20,16 @@ def load_archive_raw():
 # Chargement des données
 df = load_archive_raw()
 
+def remove_accents(text):
+    text = unicodedata.normalize('NFD', text)
+    text = re.sub(r'[\u0300-\u036f]', '', text)
+    return text
+
 # Changement type de données colonne 'review' 
 df['review'] = df['review'].astype(str)
+
+# Suppression des accents + modification de la casse 
+df['review'] = df['review'].apply(lambda x: remove_accents(x.lower()))
 
 # Passage de 0 & 1 pour les réponses Cdiscount + type de données de la colonne 'response_yesno'
 df['response_yesno'] = df['response_yesno'].fillna(0).astype(bool).astype(int)

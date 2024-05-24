@@ -3,3 +3,5 @@
 /data*
 /logs*
 Untitled-1
+src/containers/app/data/reviews_2024-05-24_processed.csv
+src/containers/app/data/ext/reviews_2024-05-24_raw.csv

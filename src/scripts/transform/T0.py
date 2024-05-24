@@ -5,6 +5,8 @@ from vaderSentiment_fr.vaderSentiment import SentimentIntensityAnalyzer
 from tqdm import tqdm
 import csv
 from datetime import datetime
+import unicodedata
+import re
 
 
 base_path1 = '/data/ext'
@@ -19,8 +21,18 @@ def last_reviews():
 
 df = last_reviews()
 
+
+
+def remove_accents(text):
+    text = unicodedata.normalize('NFD', text)
+    text = re.sub(r'[\u0300-\u036f]', '', text)
+    return text
+
 # Changement type de donnees colonne 'review' 
 df['review'] = df['review'].astype(str)
+
+# Suppression des accents + modification de la casse 
+df['review'] = df['review'].apply(lambda x: remove_accents(x.lower()))
 
 # Passage de 0 & 1 pour les réponses Cdiscount + type de données de la colonne 'response_yesno'
 df['response_yesno'] = df['response_yesno'].fillna(0).astype(bool).astype(int)
