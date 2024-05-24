@@ -11,10 +11,11 @@ Repository GitHub concernant le projet "Satisfaction Client" proposé par DataSc
 ## Comment pourrait-on évaluer la qualité du service client de Cdiscount à travers le site Trustpilot ?
 #### Objectif : S'assurer à l'aide de différentes métrics (taux de réponse, satisfaction client, keywords..) de la qualité du service client de Cdiscount et de la conformité des avis laissés.
 
-##### *Description du Projet*
+#### *Méthodologie*
 
 Ce projet développe et met en œuvre un pipeline ETL simple pour extraire, transformer et charger des données issues du site 'Trustpilot'. 
 Après le traitement des données, celles-ci sont indexées dans ElasticSearch puis exposées via Kibana, un outil de visualisation open source permettant une analyse et une visualisation interactives.
+
 
 
 1. **Installation du projet - Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS**
@@ -35,6 +36,15 @@ docker-compose up -d
 
 
 2. **Architecture du projet "CDE_Satisfaction2023"**
+
+Le projet s'articule autour de 6 micro-services construit via des images Dockerfiles spécifiques pour chaque étape du pipeline ETL, conditionnés avec des wrappers & healthchecks, ainsi qu'un fichier docker-compose.yml pour orchestrer le déploiement de ces services :
+1. *Archive* => Charge en memoire l'historique des reviews pre-2024 (+ de 120 000 avis)
+2. *Extraction* => Scraping des reviews
+3. *Tranformation* => Cleaning & valorisation des données extraites
+4. *Loading* => Chargement et indexation des données transformées dans le SGBD
+5. *ElasticSearch* => Moteur de recherche pour les données 
+6. *Kibana* => Visualisation et interprétation a l'aide d'un Dashboard
+
 
 ```bash
 .
