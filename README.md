@@ -14,8 +14,9 @@ Repository GitHub concernant le projet "Satisfaction Client" proposé par DataSc
 #### *Méthodologie*
 
 Ce projet développe et met en œuvre un pipeline ETL simple pour extraire, transformer et charger des données issues du site 'Trustpilot'. 
-Après le traitement des données, celles-ci sont indexées dans ElasticSearch puis exposées via Kibana, un outil de visualisation open source permettant une analyse et une visualisation interactives.
+Après le traitement des données, celles-ci sont indexées dans ElasticSearch puis exposées via Kibana, un outil de visualisation open source permettant une analyse et une visualisation intéractives.
 
+Le projet s'éxecute de facon quotidienne et de facon automatisée
 
 
 1. **Installation du projet - Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS**
