@@ -1,3 +1,5 @@
+# 1. Présentation du projet
+
 # CDE_Satisfaction2023
 ### Projet Satisfaction Client - Cdiscount/Trustpilot
 
@@ -23,7 +25,8 @@ Des logs sont disponibles pour s'assurer que les services fonctionnent correctem
 ![Logs du container 'Transformation'](src/doc/logs_transformation.png)
 
 
-1. **Installation du projet - Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS**
+# 2. **Installation** 
+#### *Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS*
 ```bash
 
 # Clonage du repository 
@@ -40,7 +43,7 @@ docker-compose up -d
 ```
 
 
-2. **Architecture du projet "CDE_Satisfaction2023"**
+# 3. **Architecture**
 
 Le projet s'articule autour de 7 micro-services construit via des images Dockerfiles spécifiques pour chaque étape du pipeline ETL, conditionnés avec des wrappers & healthchecks, ainsi qu'un fichier docker-compose.yml pour orchestrer le déploiement de ces services :
 1. *Archive* => Charge en memoire l'historique des reviews pre-2024 (+ de 120 000 avis)
@@ -92,14 +95,14 @@ Le projet s'articule autour de 7 micro-services construit via des images Dockerf
 ```
 
 
-3. **Vision finale du Dashboard :**
+# 4. **Dashboard Final**
 
 ![Dashboard Kibana](src/doc/dashboard_view.png)
 
 
 
 
-## 4. **Conclusion**
+# 5. **Conclusion**
 #### Ce projet a été une expérience d'apprentissage inestimable qui a nécessité de faire face à des challenges techniques importants (datadome, architecture en microservices, networking) mais qui m'ont aussi permis le développement de compétences sur des technologies essentielles utilisées par le Data Engineer.
 #### J'ai ainsi pu approfondir ma maîtrise sur les bibliotheques Python (Pandas, BS4,vaderSentiment,TQDM...), sur Docker qui m'a permis de rendre mon application plus portable et facile à déployer, FastAPI pour la création d'endpoints clés.
 #### Mais au-delà des compétences techniques, ce projet m'a aussi enseigné des leçons précieuses sur la persévérance, l'autonomie et la planification. Je suis impatient de mettre en pratique tout ce que j'ai appris dans de futurs projets personnels, et de continuer à monter en compétence !
