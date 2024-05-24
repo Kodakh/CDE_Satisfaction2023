@@ -95,3 +95,11 @@ Le projet s'articule autour de 7 micro-services construit via des images Dockerf
 3. **Vision finale du Dashboard :**
 
 ![Dashboard Kibana](src/doc/dashboard_view.png)
+
+
+
+
+## 4. **Conclusion**
+#### Ce projet a été une expérience d'apprentissage inestimable qui a nécessité de faire face à des challenges techniques importants (datadome, architecture en microservices, networking) mais qui m'ont aussi permis le développement de compétences sur des technologies essentielles utilisées par le Data Engineer.
+#### J'ai ainsi pu approfondir ma maîtrise sur les bibliotheques Python (Pandas, BS4,vaderSentiment,TQDM...), sur Docker qui m'a permis de rendre mon application plus portable et facile à déployer, FastAPI pour la création d'endpoints clés.
+#### Mais au-delà des compétences techniques, ce projet m'a aussi enseigné des leçons précieuses sur la persévérance, l'autonomie et la planification. Je suis impatient de mettre en pratique tout ce que j'ai appris dans de futurs projets personnels, et de continuer à monter en compétence !
