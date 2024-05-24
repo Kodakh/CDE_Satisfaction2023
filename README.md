@@ -42,7 +42,7 @@ docker-compose up -d
 
 2. **Architecture du projet "CDE_Satisfaction2023"**
 
-Le projet s'articule autour de 6 micro-services construit via des images Dockerfiles spécifiques pour chaque étape du pipeline ETL, conditionnés avec des wrappers & healthchecks, ainsi qu'un fichier docker-compose.yml pour orchestrer le déploiement de ces services :
+Le projet s'articule autour de 7 micro-services construit via des images Dockerfiles spécifiques pour chaque étape du pipeline ETL, conditionnés avec des wrappers & healthchecks, ainsi qu'un fichier docker-compose.yml pour orchestrer le déploiement de ces services :
 1. *Archive* => Charge en memoire l'historique des reviews pre-2024 (+ de 120 000 avis)
 2. *Extraction* => Scraping des reviews
 3. *Tranformation* => Cleaning & valorisation des données extraites
