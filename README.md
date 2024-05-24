@@ -22,7 +22,7 @@ cd CDE_Satisfaction2023
 ./run.sh
 cd src
 cd containers
-docker-compose up 
+docker-compose up -d
 
 ```
 
