@@ -6,15 +6,23 @@ Repository GitHub concernant le projet "Satisfaction Client" proposé par DataSc
 Chef de projet : Sebastien SIME - DataScientest
 Membre : Joris BENOIT
 
+Problématique posée : <span style="color: red;">Comment pourrait-on évaluer la qualité du service client de Cdiscount à travers le site Trustpilot ?</span>
+Objectif : S'assurer à l'aide de différentes métrics (taux de réponse, satisfaction client, keywords..) de la qualité du service client de Cdiscount et de la conformité des avis laissés.
+
+
 I. Installation du projet - Testé sur Ubuntu Jammy 22.04.4 LTS
+```bash
+
+# Clonage du repository 
+git clone https://github.com/Kodakh/CDE_Satisfaction2023/tree/release
 
 cd CDE_Satisfaction2023
-run.sh
+./run.sh
 cd src
 cd containers
-setup.sh
+docker-compose up 
 
-
+```
 
 
 
