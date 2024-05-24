@@ -1,16 +1,23 @@
 # CDE_Satisfaction2023
-Projet Satisfaction Client - CDE 2023
+### Projet Satisfaction Client - Cdiscount/Trustpilot
 
 Repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest pour la promotion Data Engineer de Juillet 2023 Continue
 
-Chef de projet : Sebastien SIME - DataScientest
-Membre : Joris BENOIT
-
-Problématique posée : <span style="color: red;">Comment pourrait-on évaluer la qualité du service client de Cdiscount à travers le site Trustpilot ?</span>
-Objectif : S'assurer à l'aide de différentes métrics (taux de réponse, satisfaction client, keywords..) de la qualité du service client de Cdiscount et de la conformité des avis laissés.
+#### *Chef de projet : Sebastien SIME - DataScientest*
+#### *Membre : Joris BENOIT*
 
 
-I. Installation du projet - Testé sur Ubuntu Jammy 22.04.4 LTS
+
+## Comment pourrait-on évaluer la qualité du service client de Cdiscount à travers le site Trustpilot ?
+#### Objectif : S'assurer à l'aide de différentes métrics (taux de réponse, satisfaction client, keywords..) de la qualité du service client de Cdiscount et de la conformité des avis laissés.
+
+##### *Description du Projet*
+
+Ce projet développe et met en œuvre un pipeline ETL simple pour extraire, transformer et charger des données issues du site 'Trustpilot'. 
+Après le traitement des données, celles-ci sont indexées dans ElasticSearch puis exposées via Kibana, un outil de visualisation open source permettant une analyse et une visualisation interactives.
+
+
+1. **Installation du projet - Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS**
 ```bash
 
 # Clonage du repository 
@@ -27,7 +34,7 @@ docker-compose up -d
 ```
 
 
-II. Architecture du projet "CDE_Satisfaction2023"
+2. **Architecture du projet "CDE_Satisfaction2023"**
 
 ```bash
 .
@@ -67,6 +74,6 @@ II. Architecture du projet "CDE_Satisfaction2023"
 ```
 
 
-III. Vision finale du Dashboard :
+3. **Vision finale du Dashboard :**
 
 ![Dashboard Kibana](src/doc/dashboard_view.png)
