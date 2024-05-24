@@ -51,10 +51,8 @@ with open(output_csv_path, 'w', newline='') as csv_file:
 
     for _, row in tqdm(df.iterrows(), total=len(df), desc="Export..."):
         row_dict = row.to_dict()
-        # Suppression du dictionnaire 'scores' pour éviter les erreurs
         row_dict.pop('scores', None)
         
-        # Remplacement des valeurs NaN par une chaîne vide
         for key in row_dict:
             if pd.isna(row_dict[key]):
                 row_dict[key] = ''
@@ -63,6 +61,7 @@ with open(output_csv_path, 'w', newline='') as csv_file:
 
 print("Transformation OK")
 
+## Etape 2 : Chargement des donnees transformees dans un index ES 'reviews_archive"
 
 import csv
 from elasticsearch import Elasticsearch
@@ -76,7 +75,7 @@ index_name = 'reviews_archive'
 if es.indices.exists(index=index_name):
     es.indices.delete(index=index_name)
 
-# Définition du mapping
+# mapping
 mapping = {
     "mappings": {
         "properties": {

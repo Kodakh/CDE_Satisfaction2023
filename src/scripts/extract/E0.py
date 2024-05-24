@@ -83,7 +83,7 @@ def scrap_reviews(url):
 # Paramètres de scraping
 base_url = 'https://fr.trustpilot.com/review/www.cdiscount.com'
 
-output_directory = '/data/ext'  # Utilisation du chemin du volume Docker
+output_directory = '/data/ext'  
 
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)

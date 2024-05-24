@@ -2,11 +2,4 @@
 .rtf*
 /data*
 /logs*
-src/containers/app/data/reviews_processed.csv
-src/containers/app/data/ext/last_reviews.csv
-src/scripts/archive/data/archive_processed.csv
-src/containers/app/data/reviews_2024-05-23_processed.csv
-src/containers/app/data/ext/reviews_2024-05-23_raw.csv
-src/containers/app/data/reviews_2024-05-24_processed.csv
-src/containers/app/data/ext/reviews_2024-05-24_raw.csv
 Untitled-1

@@ -1,26 +1,23 @@
-# Utilisation de l'image de base officielle Python 3.9 slim pour réduire la taille de l'image
+
 FROM python:3.9-slim
 
-# Définition du répertoire de travail dans le conteneur
 WORKDIR /app
-
-# Install curl and other necessary tools
 RUN apt-get update && apt-get install -y curl
 
-# Install Python requirements
+
 COPY requirements.txt .
 RUN python -m pip install --no-cache-dir -r requirements.txt
 RUN pip install fastapi uvicorn
 
-# Copie des scripts nécessaires dans le conteneur
+
 COPY src/scripts/transform/T0.py src/scripts/transform/
 COPY src/scripts/transform/wrapper_transformation.py src/scripts/transform/
 COPY src/scripts/transform/healthcheck_transform.py src/scripts/transform/
 
-# Rendre le script wrapper exécutable
+
 RUN chmod +x src/scripts/transform/wrapper_transformation.py
 
-# Expose port
+
 EXPOSE 8888
 
 # Définition de la commande pour exécuter le script wrapper et le serveur FastAPI

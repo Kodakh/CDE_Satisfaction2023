@@ -1,26 +1,25 @@
-# Utilisation de l'image de base officielle Python 3.9
 FROM python:3.9-slim
 
-# Définition du répertoire de travail dans le conteneur
+
 WORKDIR /app
 RUN apt-get update && apt-get install -y curl
 
-# Copie du fichier de dépendances et installation des dépendances sans cache
+
 COPY requirements.txt .
 RUN python -m pip install --no-cache-dir -r requirements.txt
 
-# Installation de FastAPI
+
 RUN pip install fastapi uvicorn
 
-# Copie des scripts nécessaires dans le conteneur
+
 COPY src/scripts/extract/E0.py src/scripts/extract/
 COPY src/scripts/extract/wrapper_extraction.py src/scripts/extract/
 COPY src/scripts/extract/healthcheck_extract.py src/scripts/extract/
 
-# Rendre le script wrapper exécutable
+
 RUN chmod +x src/scripts/extract/wrapper_extraction.py
 
-# Exposer le port pour l'API de healthcheck
+
 EXPOSE 8000
 
 # Définition de la commande pour exécuter le script wrapper et le serveur FastAPI

@@ -16,6 +16,8 @@ I. Installation du projet - Testé sur Ubuntu Jammy 22.04.4 LTS
 # Clonage du repository 
 git clone https://github.com/Kodakh/CDE_Satisfaction2023/tree/release
 
+
+# Lancement du script bash pour l'installation des dépendances + création des images 
 cd CDE_Satisfaction2023
 ./run.sh
 cd src
@@ -31,23 +33,22 @@ II. Architecture du projet "CDE_Satisfaction2023"
 .
 ├── README.md
 ├── Report
-│   └── Rendu Rapport Etape 1.rtf
+│   └── Rendu Rapport Etape 1 - SC DIACOH - BELKHIR - BENOIT.rtf
 ├── requirements.txt
 ├── run.sh
 └── src
     ├── containers
+    │   ├── Dockerfile.archive
     │   ├── Dockerfile.extraction
     │   ├── Dockerfile.loading
     │   ├── Dockerfile.transformation
-    │   ├── app
-    │   │   └── data
-    │   │       └── ext
-    │   │           └── raw_reviews.csv
-    │   ├── docker-compose.yml
-    │   └── setup.sh
+    │   └── docker-compose.yml
     ├── doc
-    │   └── crontab
     └── scripts
+        ├── archive
+        │   ├── A0.py
+        │   └── data
+        │       └── archive_raw.csv
         ├── extract
         │   ├── E0.py
         │   ├── healthcheck_extract.py
@@ -60,7 +61,7 @@ II. Architecture du projet "CDE_Satisfaction2023"
             ├── healthcheck_transform.py
             └── wrapper_transformation.py
 
-11 directories, 19 files
+10 directories, 19 files
 
 
 ```

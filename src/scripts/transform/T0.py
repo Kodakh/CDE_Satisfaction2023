@@ -60,10 +60,8 @@ with open(output_csv_path, 'w', newline='') as csv_file:
 
     for _, row in tqdm(df.iterrows(), total=len(df), desc="Export..."):
         row_dict = row.to_dict()
-        # Suppression du dictionnaire 'scores' pour éviter les erreurs
         row_dict.pop('scores', None)
         
-        # Remplacement des valeurs NaN par une chaîne vide
         for key in row_dict:
             if pd.isna(row_dict[key]):
                 row_dict[key] = ''

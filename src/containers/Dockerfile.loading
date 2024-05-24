@@ -1,20 +1,17 @@
-# Utilisation de l'image de base officielle Python 3.9 slim pour réduire la taille de l'image
 FROM python:3.9-slim
 
-# Définition du répertoire de travail dans le conteneur
-WORKDIR /app
 
-# Copie du fichier de dépendances
+WORKDIR /app
 COPY requirements.txt .
 
-# Installation des dépendances Python sans stocker le cache pour minimiser la taille de l'image
+
 RUN python -m pip install --no-cache-dir -r requirements.txt
 
-# Copie des scripts nécessaires dans le conteneur
+
 COPY src/scripts/load/L0.py src/scripts/load/
 COPY src/scripts/load/wrapper_loading.py src/scripts/load/
 
-# Rendre le script wrapper exécutable
+
 RUN chmod +x src/scripts/load/wrapper_loading.py
 
 # Définition de la commande pour exécuter le script wrapper
