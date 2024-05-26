@@ -1,5 +1,6 @@
-# CDE_Satisfaction2023
-### Projet Satisfaction Client - Cdiscount/Trustpilot
+# 1. Présentation du projet
+
+# Satisfaction Client - Cdiscount/Trustpilot
 
 Repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest pour la promotion Data Engineer de Juillet 2023 Continue
 
@@ -16,14 +17,15 @@ Repository GitHub concernant le projet "Satisfaction Client" proposé par DataSc
 Ce projet développe et met en œuvre un pipeline ETL simple pour extraire, transformer et charger des données issues du site 'Trustpilot'. 
 Après le traitement des données, celles-ci sont indexées dans ElasticSearch puis exposées via Kibana, un outil de visualisation open source permettant une analyse et une visualisation intéractives.
 
-Le projet s'éxecute de facon quotidienne et de facon automatisée.
+Le projet s'éxecute de facon quotidienne et automatisée.
 Des logs sont disponibles pour s'assurer que les services fonctionnent correctement :
 
 ![Logs du container 'Extraction'](src/doc/logs_extraction.png)
 ![Logs du container 'Transformation'](src/doc/logs_transformation.png)
 
 
-1. **Installation du projet - Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS**
+# 2. **Installation** 
+#### *Projet Testé et Installé dans une machine virtuelle hebergée sur un serveur FreeboxDelta utilisant la distribution Ubuntu Jammy 22.04.4 LTS*
 ```bash
 
 # Clonage du repository 
@@ -40,9 +42,9 @@ docker-compose up -d
 ```
 
 
-2. **Architecture du projet "CDE_Satisfaction2023"**
+# 3. **Architecture**
 
-Le projet s'articule autour de 6 micro-services construit via des images Dockerfiles spécifiques pour chaque étape du pipeline ETL, conditionnés avec des wrappers & healthchecks, ainsi qu'un fichier docker-compose.yml pour orchestrer le déploiement de ces services :
+Le projet s'articule autour de 7 micro-services construit via des images Dockerfiles spécifiques pour chaque étape du pipeline ETL, conditionnés avec des wrappers & healthchecks, ainsi qu'un fichier docker-compose.yml pour orchestrer le déploiement de ces services :
 1. *Archive* => Charge en memoire l'historique des reviews pre-2024 (+ de 120 000 avis)
 2. *Extraction* => Scraping des reviews
 3. *Tranformation* => Cleaning & valorisation des données extraites
@@ -92,6 +94,14 @@ Le projet s'articule autour de 6 micro-services construit via des images Dockerf
 ```
 
 
-3. **Vision finale du Dashboard :**
+# 4. **Dashboard Final**
 
 ![Dashboard Kibana](src/doc/dashboard_view.png)
+
+
+
+
+# 5. **Conclusion**
+#### Ce projet a été une expérience d'apprentissage inestimable qui a nécessité de faire face à des challenges techniques importants (architecture en microservices, networking) mais qui m'ont aussi permis le développement de compétences sur des technologies essentielles utilisées par le Data Engineer.
+#### J'ai ainsi pu approfondir ma maîtrise sur les bibliotheques Python (Pandas, BS4,vaderSentiment,TQDM...), sur Docker qui m'a permis de rendre mon application plus portable et facile à déployer, FastAPI pour la création d'endpoints clés.
+#### Mais au-delà des compétences techniques, ce projet m'a aussi enseigné des leçons précieuses sur la persévérance, l'autonomie et la planification. Je suis impatient de mettre en pratique tout ce que j'ai appris dans de futurs projets personnels, et de continuer à monter en compétence !
