@@ -14,14 +14,30 @@ docker build -f src/containers/Dockerfile.transformation -t image-transformation
 # docker-compose up --no-deps --build transformation
 # sudo chown -R freebox:freebox app
 # Alias Kibana
-#POST /_aliases
-#{
-#  "actions": [
-#    {
-#      "add": {
-#        "index": "reviews_*",
-#        "alias": "areviews"
-#      }
-#    }
-#  ]
-#}
+
+'''
+POST /_aliases
+{
+  "actions": [
+    {
+      "add": {
+        "index": "reviews_*",
+        "alias": "areviews"
+      }
+    }
+  ]
+}
+
+'''
+# curl -XPOST "http://elasticsearch:9200/_aliases" -H "kbn-xsrf: reporting" -H "Content-Type: application/json" -d'
+{
+  "actions": [
+    {
+      "add": {
+        "index": "reviews_*",
+        "alias": "areviews"
+      }
+    }
+  ]
+}'
+'''

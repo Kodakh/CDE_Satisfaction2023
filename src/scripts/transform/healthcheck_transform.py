@@ -4,4 +4,4 @@ app = FastAPI()
 
 @app.get('/health')
 def healthcheck():
-    return {"status": "ok"}
+    return {"status": "Le service de transformation fonctionne correctement"}

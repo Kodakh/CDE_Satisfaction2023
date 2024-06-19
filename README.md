@@ -1,6 +1,6 @@
 # 1. Présentation du projet
 
-# Satisfaction Client - Cdiscount/Trustpilot
+# Satisfaction Client - Marketplace/Trustpilot
 
 Repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest pour la promotion Data Engineer de Juillet 2023 Continue
 
@@ -9,7 +9,7 @@ Repository GitHub concernant le projet "Satisfaction Client" proposé par DataSc
 
 
 
-## Comment pourrait-on évaluer la qualité du service client de Cdiscount à travers le site Trustpilot ?
+## Comment pourrait-on évaluer la qualité du service client d'une Marketplace à travers le site Trustpilot ?
 #### Objectif : S'assurer à l'aide de différentes métrics (taux de réponse, satisfaction client, keywords..) de la qualité du service client de Cdiscount et de la conformité des avis laissés.
 
 #### *Méthodologie*
@@ -96,12 +96,12 @@ Le projet s'articule autour de 7 micro-services construit via des images Dockerf
 
 # 4. **Dashboard Final**
 
-![Dashboard Kibana](src/doc/dashboard_view.png)
+![Dashboard Kibana](src/doc/dashboardv2.png)
 
 
 
 
 # 5. **Conclusion**
-#### Ce projet a été une expérience d'apprentissage inestimable qui a nécessité de faire face à des challenges techniques importants (datadome, architecture en microservices, networking) mais qui m'ont aussi permis le développement de compétences sur des technologies essentielles utilisées par le Data Engineer.
+#### Ce projet a été une expérience d'apprentissage inestimable qui a nécessité de faire face à des challenges techniques importants (architecture en microservices, networking) mais qui m'ont aussi permis le développement de compétences sur des technologies essentielles utilisées par le Data Engineer.
 #### J'ai ainsi pu approfondir ma maîtrise sur les bibliotheques Python (Pandas, BS4,vaderSentiment,TQDM...), sur Docker qui m'a permis de rendre mon application plus portable et facile à déployer, FastAPI pour la création d'endpoints clés.
 #### Mais au-delà des compétences techniques, ce projet m'a aussi enseigné des leçons précieuses sur la persévérance, l'autonomie et la planification. Je suis impatient de mettre en pratique tout ce que j'ai appris dans de futurs projets personnels, et de continuer à monter en compétence !
