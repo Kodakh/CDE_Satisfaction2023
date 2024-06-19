@@ -96,7 +96,7 @@ Le projet s'articule autour de 7 micro-services construit via des images Dockerf
 
 # 4. **Dashboard Final**
 
-![Dashboard Kibana](src/doc/dashboard_view.png)
+![Dashboard Kibana](src/doc/dashboardv2.png)
 
 
 
