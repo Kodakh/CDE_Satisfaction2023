@@ -66,8 +66,6 @@ services:
       - app_network
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - ELASTICSEARCH_USERNAME=jben
-      - ELASTICSEARCH_PASSWORD=4862
     depends_on:
       elasticsearch:
         condition: service_healthy
