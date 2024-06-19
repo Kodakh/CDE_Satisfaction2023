@@ -1,6 +1,6 @@
 # 1. Présentation du projet
 
-# Satisfaction Client - Cdiscount/Trustpilot
+# Satisfaction Client - Marketplace/Trustpilot
 
 Repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest pour la promotion Data Engineer de Juillet 2023 Continue
 
@@ -9,7 +9,7 @@ Repository GitHub concernant le projet "Satisfaction Client" proposé par DataSc
 
 
 
-## Comment pourrait-on évaluer la qualité du service client de Cdiscount à travers le site Trustpilot ?
+## Comment pourrait-on évaluer la qualité du service client d'une Marketplace à travers le site Trustpilot ?
 #### Objectif : S'assurer à l'aide de différentes métrics (taux de réponse, satisfaction client, keywords..) de la qualité du service client de Cdiscount et de la conformité des avis laissés.
 
 #### *Méthodologie*
