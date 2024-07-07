@@ -2,9 +2,9 @@
 
 # Satisfaction Client - Marketplace/Trustpilot
 
-Repository GitHub concernant le projet "Satisfaction Client" proposé par DataScientest pour la promotion Data Engineer de Juillet 2023 Continue
+Repository GitHub concernant le projet "Satisfaction Client" pour la promotion Data Engineer de Juillet 2023 Continue
 
-#### *Chef de projet : Sebastien SIME - DataScientest*
+#### *Chef de projet : Sebastien SIME*
 #### *Membre : Joris BENOIT*
 
 
