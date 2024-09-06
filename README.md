@@ -2,7 +2,7 @@
 
 # Satisfaction Client - Marketplace/Trustpilot
 
-Repository GitHub concernant le projet "Satisfaction Client" pour la promotion DS Paris Data Engineer de Juillet 2023 Continue.
+Repository GitHub concernant le projet "Satisfaction Client" pour la promotion DS Paris Data Engineer de Juillet 2023 (Continue).
 
 #### *Chef de projet : Sebastien SIME*
 #### *Membre : Joris BENOIT*
